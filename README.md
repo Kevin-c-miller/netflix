@@ -16,3 +16,4 @@
 - Heroicons
 - React-Icons
 - TheMovieDB API
+- TailwindCSS-Textshadow
