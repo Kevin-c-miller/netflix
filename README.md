@@ -12,8 +12,10 @@
 
 ## Libraries and Dependencies
 
-- Tailwind CSS
 - Heroicons
 - React-Icons
+- Tailwind CSS
+- TailwindCSS-textshadow
+- Tailwind-scrollbar
+- Tailwind-scrollbar-hide
 - TheMovieDB API
-- TailwindCSS-Textshadow
