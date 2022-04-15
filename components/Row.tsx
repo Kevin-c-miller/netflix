@@ -6,6 +6,6 @@ interface Props {
   movies: Movie[]
 }
 
-export default function Row({ title, movies }) {
+export default function Row({ title, movies }: Props) {
   return <div>Row</div>
 }
