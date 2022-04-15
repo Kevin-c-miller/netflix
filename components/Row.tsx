@@ -19,9 +19,11 @@ export default function Row({ title, movies }: Props) {
   const handleScroll = (direction: string) => {
     setIsMoved(true)
 
+    // grab current object from reference
     if (rowRef.current) {
       const { scrollLeft, clientWidth } = rowRef.current
 
+      // variable to figure out how much to scroll
       const scrollTo =
         direction === 'left'
           ? scrollLeft - clientWidth
