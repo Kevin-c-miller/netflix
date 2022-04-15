@@ -10,8 +10,9 @@
 - React
 - TypeScript
 
-## Libraries and Depencies
+## Libraries and Dependencies
 
 - Tailwind CSS
 - Heroicons
 - React-Icons
+- TheMovieDB API
