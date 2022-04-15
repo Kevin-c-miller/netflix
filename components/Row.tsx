@@ -1,3 +1,5 @@
+import { ChevronLeftIcon } from '@heroicons/react/outline'
+import { ChevronRightIcon } from '@heroicons/react/outline'
 import React from 'react'
 import { Movie } from '../types'
 
@@ -7,5 +9,13 @@ interface Props {
 }
 
 export default function Row({ title, movies }: Props) {
-  return <div>Row</div>
+  return (
+    <div className="h-40 space-y-0.5 md:space-y-2">
+      <h2>{title}</h2>
+      <div className="group relative md:-ml-2">
+        <ChevronLeftIcon className="absolute top-0 bottom-0 left-2 z-40 m-auto h-9 w-9 cursor-pointer opacity-0 transition hover:scale-125 group-hover:opacity-100" />
+        <ChevronRightIcon className="absolute top-0 bottom-0 left-2 z-40 m-auto h-9 w-9 cursor-pointer opacity-0 transition hover:scale-125 group-hover:opacity-100" />
+      </div>
+    </div>
+  )
 }
