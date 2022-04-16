@@ -10,12 +10,12 @@
 - React
 - TypeScript
 - Firebase
+- Tailwind CSS
 
 ## Libraries and Dependencies
 
 - Hero icons
 - React-Icons
-- Tailwind CSS
 - TailwindCSS-textshadow
 - Tailwind-scrollbar
 - Tailwind-scrollbar-hide
