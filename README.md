@@ -13,7 +13,7 @@
 
 ## Libraries and Dependencies
 
-- Heroicons
+- Hero icons
 - React-Icons
 - Tailwind CSS
 - TailwindCSS-textshadow
@@ -21,3 +21,6 @@
 - Tailwind-scrollbar-hide
 - TheMovieDB API
 - React-hook-form
+- Recoil
+- Material UI
+- React-player
