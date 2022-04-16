@@ -96,7 +96,11 @@ export default function login() {
 
         <div className="text-[gray]">
           New To Netflix?{' '}
-          <button type="submit" className="text-white hover:underline">
+          <button
+            type="submit"
+            className="text-white hover:underline"
+            onClick={() => setLogin(false)}
+          >
             Sign Up Now
           </button>
         </div>
