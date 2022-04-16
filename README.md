@@ -9,6 +9,7 @@
 - Next JS
 - React
 - TypeScript
+- Firebase
 
 ## Libraries and Dependencies
 
