@@ -1,6 +1,13 @@
-import { XIcon } from '@heroicons/react/outline'
+import {
+  PlusIcon,
+  ThumbUpIcon,
+  VolumeOffIcon,
+  VolumeUpIcon,
+  XIcon,
+} from '@heroicons/react/outline'
 import MuiModal from '@mui/material/Modal'
 import { useEffect, useState } from 'react'
+import { FaPlay } from 'react-icons/fa'
 import ReactPlayer from 'react-player'
 import { useRecoilState } from 'recoil'
 import { modalState, movieState } from '../atoms/modalAtom'
@@ -46,7 +53,11 @@ export default function Modal() {
   }, [movie])
 
   return (
-    <MuiModal open={showModal} onClose={handleClose}>
+    <MuiModal
+      open={showModal}
+      onClose={handleClose}
+      className="fixex !top-7 left-0 right-0 z-50 mx-auto w-full max-w-5xl overflow-hidden overflow-y-scroll rounded-md scrollbar-hide"
+    >
       <>
         <button
           className="modalButton absolute right-5 top-5 !z-40 h-9 w-9 border-none bg-[#181818]"
@@ -55,7 +66,7 @@ export default function Modal() {
           <XIcon className="h-6 w-6" />
         </button>
 
-        <div>
+        <div className="relative pt-[56.25%]">
           <ReactPlayer
             url={`https://www.youtube.com/watch?v=${trailer}`}
             width="100%"
@@ -64,6 +75,31 @@ export default function Modal() {
             playing
             muted={muted}
           />
+
+          <div className="item-center absolute bottom-10 flex w-full justify-between px-10">
+            <div className="flex space-x-2">
+              <button className="flex items-center gap-x-2 rounded bg-white px-8 text-xl font-bold text-black transition hover:bg-[#e6e6e6]">
+                {' '}
+                <FaPlay className="h-7 w-7 text-black" /> Play
+              </button>
+
+              <button className="modalButton">
+                <PlusIcon className="h-7 w-7" />
+              </button>
+
+              <button className="modalButton">
+                <ThumbUpIcon className="h-7 w-7" />
+              </button>
+            </div>
+
+            <button onClick={() => setMuted(!muted)} className="modalButton">
+              {muted ? (
+                <VolumeOffIcon className="h-6 w-6" />
+              ) : (
+                <VolumeUpIcon className="h-6 w-6" />
+              )}
+            </button>
+          </div>
         </div>
       </>
     </MuiModal>
