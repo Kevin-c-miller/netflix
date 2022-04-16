@@ -9,6 +9,7 @@
 - Next JS
 - React
 - TypeScript
+- Firebase
 
 ## Libraries and Dependencies
 
@@ -19,3 +20,4 @@
 - Tailwind-scrollbar
 - Tailwind-scrollbar-hide
 - TheMovieDB API
+- React-hook-form
