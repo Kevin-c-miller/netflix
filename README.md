@@ -23,3 +23,4 @@
 - React-hook-form
 - Recoil
 - Material UI
+- React-player
