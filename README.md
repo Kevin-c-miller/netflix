@@ -20,3 +20,4 @@
 - Tailwind-scrollbar
 - Tailwind-scrollbar-hide
 - TheMovieDB API
+- React-hook-form
