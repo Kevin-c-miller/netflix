@@ -26,3 +26,4 @@
 - Mui/material
 - React-player
 - @stripe/firestore-stripe-payments
+- next-transpile-modules
