@@ -3,7 +3,10 @@ import { Product } from '@stripe/firestore-stripe-payments'
 import Head from 'next/head'
 import Link from 'next/link'
 import React, { useState } from 'react'
+import { selector } from 'recoil'
 import useAuth from '../hooks/useAuth'
+import { loadCheckout } from '../lib/stripe'
+import Loader from './Loader'
 import Table from './Table'
 
 interface Props {
@@ -12,7 +15,23 @@ interface Props {
 
 export default function Plans({ products }: Props) {
   const [selectedPlan, setSelectedPlan] = useState<Product | null>(products[2])
-  const { logout } = useAuth()
+  const [isBillingLoading, setBillingLoading] = useState(false)
+
+  // logout function from customer auth hook
+  const { logout, user } = useAuth()
+
+  // grabbing the correct plan user selects
+  const subscribeToPlan = () => {
+    if (!user) return
+
+    loadCheckout(
+      selectedPlan?.prices[0].active === true
+        ? selectedPlan?.prices[0].id!
+        : selectedPlan?.prices[1].id!
+    )
+    setBillingLoading(true)
+  }
+  console.log(selectedPlan)
 
   return (
     <div>
@@ -40,7 +59,7 @@ export default function Plans({ products }: Props) {
         </button>
       </header>
 
-      <main className="max-w-5xl px-5 pt-28 pb-12 transition-all md:px-10">
+      <main className="mx-auto max-w-5xl px-5 pt-28 pb-12 transition-all md:px-10">
         <h1 className="mb-3 text-3xl font-medium">
           Choose the plan that's right for you
         </h1>
@@ -76,9 +95,21 @@ export default function Plans({ products }: Props) {
           </div>
 
           {/* table info for each option */}
-          <Table products={products} />
+          <Table products={products} selectedPlan={selectedPlan} />
 
-          <button>Subscribe</button>
+          <button
+            disabled={!selectedPlan || isBillingLoading}
+            className={`mx-auto w-11/12 rounded bg-[#E50914] py-4 text-xl shadow hover:bg-[#f6121d] md:w-[420px] ${
+              isBillingLoading && 'opacity-60'
+            }`}
+            onClick={subscribeToPlan}
+          >
+            {isBillingLoading ? (
+              <Loader color="dark:fill-gray-300" />
+            ) : (
+              'Subscribe'
+            )}
+          </button>
         </div>
       </main>
     </div>

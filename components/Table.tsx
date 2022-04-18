@@ -1,18 +1,30 @@
+import { CheckIcon } from '@heroicons/react/outline'
 import { Product } from '@stripe/firestore-stripe-payments'
 
 interface Props {
   products: Product[]
+  selectedPlan: Product | null
 }
 
-export default function Table({ products }: Props) {
+export default function Table({ products, selectedPlan }: Props) {
   return (
     <table>
       <tbody className="divide-y divide-[gray]">
         <tr className="tableRow">
           <td className="tableDataTitle">Yearly Price</td>
           {products.map((product) => (
-            <td key={product.id} className="tableDataFeature">
-              USD {`$${(product.prices[0].unit_amount! / 100).toFixed(2)}`}
+            <td
+              key={product.id}
+              className={`tableDataFeature ${
+                selectedPlan?.id === product.id
+                  ? 'text-[#E50914]'
+                  : 'text-[gray]'
+              }`}
+            >
+              USD{' '}
+              {product.prices[0].active === true
+                ? `$${(product.prices[0].unit_amount! / 100).toFixed(2)}`
+                : `$${(product.prices[1].unit_amount! / 100).toFixed(2)}`}
             </td>
           ))}
         </tr>
@@ -20,8 +32,51 @@ export default function Table({ products }: Props) {
         <tr className="tableRow">
           <td className="tableDataTitle">Video Quality</td>
           {products.map((product) => (
-            <td key={product.id} className="tableDataFeature">
+            <td
+              key={product.id}
+              className={`tableDataFeature ${
+                selectedPlan?.id === product.id
+                  ? 'text-[#E50914]'
+                  : 'text-[gray]'
+              }`}
+            >
               {product.metadata.videoQuality}
+            </td>
+          ))}
+        </tr>
+
+        <tr className="tableRow">
+          <td className="tableDataTitle">Resolution</td>
+          {products.map((product) => (
+            <td
+              className={`tableDataFeature ${
+                selectedPlan?.id === product.id
+                  ? 'text-[#E50914]'
+                  : 'text-[gray]'
+              }`}
+              key={product.id}
+            >
+              {product.metadata.resolution}
+            </td>
+          ))}
+        </tr>
+
+        <tr className="tableRow">
+          <td className="tableDataTitle">
+            Watch on your TV, computer, mobile phone and tablet
+          </td>
+          {products.map((product) => (
+            <td
+              className={`tableDataFeature ${
+                selectedPlan?.id === product.id
+                  ? 'text-[#E50914]'
+                  : 'text-[gray]'
+              }`}
+              key={product.id}
+            >
+              {product.metadata.portability === 'true' && (
+                <CheckIcon className="inline-block h-8 w-8" />
+              )}
             </td>
           ))}
         </tr>
