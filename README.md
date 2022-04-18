@@ -11,6 +11,7 @@
 - TypeScript
 - Firebase
 - Tailwind CSS
+- Stripe
 
 ## Libraries and Dependencies
 
