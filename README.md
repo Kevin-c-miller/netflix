@@ -23,5 +23,6 @@
 - TheMovieDB API
 - React-hook-form
 - Recoil
-- Material UI
+- Mui/material
 - React-player
+- @stripe/firestore-stripe-payments
