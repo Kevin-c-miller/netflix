@@ -11,6 +11,7 @@
 - TypeScript
 - Firebase
 - Tailwind CSS
+- Stripe
 
 ## Libraries and Dependencies
 
@@ -22,5 +23,7 @@
 - TheMovieDB API
 - React-hook-form
 - Recoil
-- Material UI
+- Mui/material
 - React-player
+- @stripe/firestore-stripe-payments
+- next-transpile-modules

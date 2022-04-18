@@ -5,10 +5,13 @@ import { modalState } from '../atoms/modalAtom'
 import Banner from '../components/Banner'
 import Header from '../components/Header'
 import Modal from '../components/Modal'
+import Plans from '../components/Plans'
 import Row from '../components/Row'
 import useAuth from '../hooks/useAuth'
 import { Movie } from '../types'
 import requests from '../utils/requests'
+import payments from '../lib/stripe'
+import { getProducts, Product } from '@stripe/firestore-stripe-payments'
 
 interface Props {
   netflixOriginals: Movie[]
@@ -19,6 +22,7 @@ interface Props {
   horrorMovies: Movie[]
   romanceMovies: Movie[]
   documentaries: Movie[]
+  products: Product[]
 }
 
 const Home = ({
@@ -30,13 +34,15 @@ const Home = ({
   romanceMovies,
   topRated,
   trendingNow,
+  products,
 }: Props) => {
   const { logout, loading } = useAuth()
   const showModal = useRecoilValue(modalState)
+  const subscription = false
 
-  if (loading) {
-    return null
-  }
+  if (loading || subscription === null) return null
+
+  if (!subscription) return <Plans products={products} />
 
   return (
     <div
@@ -74,6 +80,13 @@ export default Home
 
 // server side rendering -> imported at top of file in Props
 export const getServerSideProps = async () => {
+  const products = await getProducts(payments, {
+    includePrices: true,
+    activeOnly: true,
+  })
+    .then((res) => res)
+    .catch((error) => console.log(error.message))
+
   const [
     netflixOriginals,
     trendingNow,
@@ -104,6 +117,7 @@ export const getServerSideProps = async () => {
       horrorMovies: horrorMovies.results,
       romanceMovies: romanceMovies.results,
       documentaries: documentaries.results,
+      products,
     },
   }
 }
