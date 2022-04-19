@@ -23,7 +23,7 @@ export default function Account({ products }: Props) {
   return (
     <div>
       <Head>
-        <title>Netflix | Account Settings</title>
+        <title>Netflix | Account</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className={`bg-[#141414]`}>
