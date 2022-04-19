@@ -27,3 +27,4 @@
 - React-player
 - @stripe/firestore-stripe-payments
 - next-transpile-modules
+- React-hot-toast
