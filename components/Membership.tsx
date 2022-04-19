@@ -54,14 +54,14 @@ export default function Membership() {
               {subscription?.current_period_end}
             </p>
           </div> */}
-          <div className="md:text-right">
-            <p className="membershipLink">Manage payment info</p>
-            <p className="membershipLink">Add backup payment method</p>
-            <p className="membershipLink">Billing Details</p>
-            <p className="membershipLink">Change billing day</p>
-          </div>
+        <div className="md:text-right">
+          <p className="membershipLink">Manage payment info</p>
+          <p className="membershipLink">Add backup payment method</p>
+          <p className="membershipLink">Billing Details</p>
+          <p className="membershipLink">Change billing day</p>
         </div>
       </div>
     </div>
+    // </div>
   )
 }
