@@ -3,6 +3,7 @@ import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useState } from 'react'
+import Membership from '../components/Membership'
 import useAuth from '../hooks/useAuth'
 import useSubscription from '../hooks/useSubscription'
 import payments from '../lib/stripe'
@@ -22,7 +23,7 @@ export default function Account({ products }: Props) {
   return (
     <div>
       <Head>
-        <title>Netflix | Account Settings</title>
+        <title>Netflix | Account</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className={`bg-[#141414]`}>
@@ -54,7 +55,7 @@ export default function Account({ products }: Props) {
           </div>
         </div>
 
-        {/* <Membership /> */}
+        <Membership />
 
         <div className="md: mt-6 grid grid-cols-1 gap-x-4 border px-4 py-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-0 md:pb-0">
           <h4>Plan Details</h4>
@@ -67,7 +68,19 @@ export default function Account({ products }: Props) {
               )[0]?.name
             }
           </div>
-          <p>Change Plan</p>
+          <p className="cursor-pointer text-blue-500 hover:underline md:text-right">
+            Change Plan
+          </p>
+        </div>
+
+        <div className="mt-6 grid grid-cols-1 gap-x-4 border px-4 py-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-0">
+          <h4 className="text-lg text-[gray]">Settings</h4>
+          <p
+            className="col-span-3 cursor-pointer text-blue-500 hover:underline"
+            onClick={logout}
+          >
+            Sign out of all devices
+          </p>
         </div>
       </main>
     </div>
