@@ -8,6 +8,7 @@ import useAuth from '../hooks/useAuth'
 import { loadCheckout } from '../lib/stripe'
 import Loader from './Loader'
 import Table from './Table'
+import TestCards from './TestCards'
 
 interface Props {
   products: Product[]
@@ -131,13 +132,7 @@ export default function Plans({ products }: Props) {
                 <h4 className="my-3 py-3">
                   Below are test cards you can use for the payment screen
                 </h4>
-                <Image
-                  src="/../public/card-data.png"
-                  alt="test"
-                  width="650"
-                  height="500"
-                  className="m-3 rounded border-2 border-[#e50914]"
-                />
+                <TestCards />
               </div>
             )}
           </div>
