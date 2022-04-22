@@ -1,11 +1,11 @@
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import { Movie } from '../types'
-import { baseUrl } from '../constants/movie'
-import { FaPlay } from 'react-icons/fa'
 import { InformationCircleIcon } from '@heroicons/react/solid'
+import { useEffect, useState } from 'react'
+import { baseUrl } from '../constants/movie'
+import { Movie } from '../types'
+import { FaPlay } from 'react-icons/fa'
 import { useRecoilState } from 'recoil'
 import { modalState, movieState } from '../atoms/modalAtom'
+import Image from 'next/image'
 
 interface Props {
   netflixOriginals: Movie[]
@@ -13,8 +13,8 @@ interface Props {
 
 export default function Banner({ netflixOriginals }: Props) {
   const [movie, setMovie] = useState<Movie | null>(null)
-  const [showModal, setShowModal] = useRecoilState(modalState)
   const [currentMovie, setCurrentMovie] = useRecoilState(movieState)
+  const [showModal, setShowModal] = useRecoilState(modalState)
 
   // randomly selecting a differnet movie on page load
   useEffect(() => {

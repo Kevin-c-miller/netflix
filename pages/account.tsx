@@ -6,7 +6,7 @@ import { useState } from 'react'
 import Membership from '../components/Membership'
 import useAuth from '../hooks/useAuth'
 import useSubscription from '../hooks/useSubscription'
-import payments from '../lib/stripe'
+import payments, { goToBilling } from '../lib/stripe'
 
 interface Props {
   products: Product[]
@@ -16,7 +16,7 @@ export default function Account({ products }: Props) {
   console.log(products)
   const { user, logout, loading } = useAuth()
   const subscription = useSubscription(user)
-  const [isBillingLoading, setBillingLoading] = useState(false)
+  // const [isBillingLoading, setBillingLoading] = useState(false)
 
   if (loading) return null
 
@@ -55,7 +55,7 @@ export default function Account({ products }: Props) {
           </div>
         </div>
 
-        {/* <Membership /> */}
+        <Membership />
 
         <div className="md: mt-6 grid grid-cols-1 gap-x-4 border px-4 py-4 md:grid-cols-4 md:border-x-0 md:border-t md:border-b-0 md:px-0 md:pb-0">
           <h4>Plan Details</h4>
@@ -68,7 +68,10 @@ export default function Account({ products }: Props) {
               )[0]?.name
             }
           </div>
-          <p className="cursor-pointer text-blue-500 hover:underline md:text-right">
+          <p
+            className="cursor-pointer text-blue-500 hover:underline md:text-right"
+            onClick={goToBilling}
+          >
             Change Plan
           </p>
         </div>
