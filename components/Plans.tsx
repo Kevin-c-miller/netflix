@@ -1,11 +1,11 @@
 import { CheckIcon } from '@heroicons/react/outline'
 import { Product } from '@stripe/firestore-stripe-payments'
 import Head from 'next/head'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import useAuth from '../hooks/useAuth'
-// import { loadCheckout } from '../lib/stripe'
-import { useRouter } from 'next/router'
+import { loadCheckout } from '../lib/stripe'
 import Loader from './Loader'
 import Table from './Table'
 
@@ -16,25 +16,27 @@ interface Props {
 export default function Plans({ products }: Props) {
   const [selectedPlan, setSelectedPlan] = useState<Product | null>(products[2])
   const [isBillingLoading, setBillingLoading] = useState(false)
+  const [showCards, setShowCards] = useState(false)
 
   // logout function from customer auth hook
   const { logout, user } = useAuth()
-
-  const router = useRouter()
 
   // grabbing the correct plan user selects
   const subscribeToPlan = () => {
     if (!user) return
 
-    // loadCheckout(
-    selectedPlan?.prices[0].active === true
-      ? selectedPlan?.prices[0].id!
-      : selectedPlan?.prices[1].id!
-    // )
+    loadCheckout(
+      selectedPlan?.prices[0].active === true
+        ? selectedPlan?.prices[0].id!
+        : selectedPlan?.prices[1].id!
+    )
     setBillingLoading(true)
-    router.push('/account')
   }
-  console.log(selectedPlan)
+
+  // toggling onclick function for showing/hiding the test cards div
+  const toggleCardDiv = () => {
+    setShowCards((prevShowCards) => !prevShowCards)
+  }
 
   return (
     <div>
@@ -113,6 +115,32 @@ export default function Plans({ products }: Props) {
               'Subscribe'
             )}
           </button>
+
+          {/* button for toggling the hidden div showing test cards */}
+          <div className="flex flex-col items-center justify-center py-3">
+            <button
+              className="mx-auto my-4 rounded bg-[#e50914] p-2"
+              onClick={toggleCardDiv}
+            >
+              {!showCards ? ' Show Test Cards From Stripe' : 'Hide Test Cards'}
+            </button>
+
+            {/* div showing an image of the test cards for payment screen */}
+            {showCards && (
+              <div className="flex flex-col items-center justify-center py-4">
+                <h4 className="my-3 py-3">
+                  Below are test cards you can use for the payment screen
+                </h4>
+                <Image
+                  src="/../public/card-data.png"
+                  alt="test"
+                  width="650"
+                  height="500"
+                  className="m-3 rounded border-2 border-[#e50914]"
+                />
+              </div>
+            )}
+          </div>
         </div>
       </main>
     </div>
