@@ -4,7 +4,8 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useState } from 'react'
 import useAuth from '../hooks/useAuth'
-import { loadCheckout } from '../lib/stripe'
+// import { loadCheckout } from '../lib/stripe'
+import { useRouter } from 'next/router'
 import Loader from './Loader'
 import Table from './Table'
 
@@ -19,16 +20,19 @@ export default function Plans({ products }: Props) {
   // logout function from customer auth hook
   const { logout, user } = useAuth()
 
+  const router = useRouter()
+
   // grabbing the correct plan user selects
   const subscribeToPlan = () => {
     if (!user) return
 
-    loadCheckout(
-      selectedPlan?.prices[0].active === true
-        ? selectedPlan?.prices[0].id!
-        : selectedPlan?.prices[1].id!
-    )
+    // loadCheckout(
+    selectedPlan?.prices[0].active === true
+      ? selectedPlan?.prices[0].id!
+      : selectedPlan?.prices[1].id!
+    // )
     setBillingLoading(true)
+    router.push('/account')
   }
   console.log(selectedPlan)
 
